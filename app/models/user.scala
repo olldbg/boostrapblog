@@ -36,7 +36,7 @@ class user(var username: String, var password: String) {
         val result: Int = SQL("update user set username={newname} where username = {username}")
           .on('username -> username, 'newname -> newname).executeUpdate()
         true
-      }catch {
+      } catch {
         case _: Exception => false
       }
     }
@@ -81,6 +81,12 @@ object user {
       } catch {
         case _: Exception => Unit
       }
+    }
+  }
+
+  def deleteuserbyname(name: String) = {
+    DB.withConnection { implicit c =>
+      val result: Int = SQL("delete from user where username = {username}").on('username -> name).executeUpdate()
     }
   }
 }

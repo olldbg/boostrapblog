@@ -25,9 +25,9 @@ object Application extends Controller {
 //    u.headphoto="/shax/xbsak"
 //    u.sign="cbahcbkjasbckasbjc"
 //    u.save
-      val u = user.getuserbyname("name3")
-      if(u.isInstanceOf[user]) {
-        var u1 = u.asInstanceOf[user]
+//      val u = user.getuserbyname("name3")
+//      if(u.isInstanceOf[user]) {
+//        var u1 = u.asInstanceOf[user]
 //        u1.password="123"
 //        u1.phonenumber="17238127368"
 //        u1.birthday="/12/321"
@@ -37,8 +37,9 @@ object Application extends Controller {
 //        {
 //          print("更改失败")
 //        }
-      }
-    print(user.getpasswordbyname("name2"))
+//      }
+//    user.deleteuserbyname("name3")
+//    print(user.getpasswordbyname("name2"))
     Ok(views.html.index("Your new application is ready."))
   }
 
