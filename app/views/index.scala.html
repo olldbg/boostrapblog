@@ -1,7 +1,325 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main("Welcome to Play"){
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+    您还没有登陆，请<a href="#" data-toggle="modal" data-target="#myModal">登陆</a>
+</div>
+}{
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">登陆</h4>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
 
-    @play20.welcome(message)
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#loggin" aria-controls="home" role="tab"
+                                                                  data-toggle="tab">登陆</a></li>
+                        <li role="presentation"><a href="#regist" aria-controls="profile" role="tab"
+                                                   data-toggle="tab">注册</a></li>
+                    </ul>
 
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="loggin">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用户名</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                           placeholder="请输入用户名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                           placeholder="请输入密码">
+                                </div>
+                                <div class="login-button clearfix">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-label="Close">关闭</button>
+                                    <button type="submit" class="btn btn-primary pull-right">登陆</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="regist">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">用户名</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail2"
+                                           placeholder="请输入用户名">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">密码</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword2"
+                                           placeholder="请输入密码">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">确认密码</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword3"
+                                           placeholder="请输入确认密码">
+                                </div>
+                                <div class="login-button clearfix">
+                                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-label="Close">关闭</button>
+                                    <button type="submit" class="btn btn-primary pull-right">注册</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="content-wrap">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8 main-content">
+                <article id="1" class="post tag-about-ghost tag-release">
+
+                    <div class="post-head">
+                        <a href="javascript:" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="bottom"><span class="glyphicon glyphicon-menu-down"></span></a>
+                        <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
+                            <time class="date" datetime="2015-04-21">2015年04月21日</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Ghost 0.6.0 已经正式发布了！Github、npm、Ghost.org 和 GhostChina.com 上已经都可以下载了。Ghost 0.6.0
+                            的代码有了很多改变，同时也增加了很多功能、修改了很多 bug。 主要变化 [新增] 编辑器增加了拼写检查（针对的是英文</p>
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                    </div>
+
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <i class="fa fa-folder-open-o"></i>
+                            <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">展开评论</a>
+                        </div>
+                    </footer>
+                    <div class="collapse" id="collapseExample" style="margin-top: 10px">
+                        <div class="well">
+                            <div class="commentbox clearfix">
+                                <input type="text" class="form-control">
+                                <button type="button" class="btn btn-default pull-right" style="margin: 10px 0">评论</button>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="..." alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Media heading</h4>
+                                    ...
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="..." alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Media heading</h4>
+                                    ...
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="..." alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Media heading</h4>
+                                    ...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article id="2" class="post tag-about-ghost tag-release">
+
+                    <div class="post-head">
+                        <a href="javascript:" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="bottom"><span class="glyphicon glyphicon-menu-down"></span></a>
+                        <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
+
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
+                            <time class="date" datetime="2015-04-21">2015年04月21日</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Ghost 0.6.0 已经正式发布了！Github、npm、Ghost.org 和 GhostChina.com 上已经都可以下载了。Ghost 0.6.0
+                            的代码有了很多改变，同时也增加了很多功能、修改了很多 bug。 主要变化 [新增] 编辑器增加了拼写检查（针对的是英文</p>
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                    </div>
+
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <i class="fa fa-folder-open-o"></i>
+                            <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+                <article id="3" class="post tag-about-ghost tag-release">
+
+                    <div class="post-head">
+                        <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
+
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
+                            <time class="date" datetime="2015-04-21">2015年04月21日</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Ghost 0.6.0 已经正式发布了！Github、npm、Ghost.org 和 GhostChina.com 上已经都可以下载了。Ghost 0.6.0
+                            的代码有了很多改变，同时也增加了很多功能、修改了很多 bug。 主要变化 [新增] 编辑器增加了拼写检查（针对的是英文</p>
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                    </div>
+
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+                <article id="4" class="post tag-about-ghost tag-release">
+
+                    <div class="post-head">
+                        <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
+
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
+                            <time class="date" datetime="2015-04-21">2015年04月21日</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Ghost 0.6.0 已经正式发布了！Github、npm、Ghost.org 和 GhostChina.com 上已经都可以下载了。Ghost 0.6.0
+                            的代码有了很多改变，同时也增加了很多功能、修改了很多 bug。 主要变化 [新增] 编辑器增加了拼写检查（针对的是英文</p>
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                    </div>
+
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+                <article id="5" class="post tag-about-ghost tag-release">
+
+                    <div class="post-head">
+                        <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
+
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
+                            <time class="date" datetime="2015-04-21">2015年04月21日</time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Ghost 0.6.0 已经正式发布了！Github、npm、Ghost.org 和 GhostChina.com 上已经都可以下载了。Ghost 0.6.0
+                            的代码有了很多改变，同时也增加了很多功能、修改了很多 bug。 主要变化 [新增] 编辑器增加了拼写检查（针对的是英文</p>
+                    </div>
+                    <div class="post-permalink">
+                        <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                    </div>
+
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+            </main>
+            <aside class="col-md-3 sidebar hidden-xs hidden-sm">
+                <div class="widget" data-spy="affix">
+                    <h4 class="title">标签云</h4>
+
+                    <div class="content tag-cloud">
+                        <a href="/tag/about-ghost/">Ghost</a>
+                        <a href="/tag/release/">新版本发布</a>
+                        <a href="/tag/javascript/">JavaScript</a>
+                        <a href="/tag/promise/">Promise</a>
+                        <a href="/tag/zhuti/">主题</a>
+                        <a href="/tag/mysql/">MySQL</a>
+                        <a href="/tag/nodejs/">Node.js</a>
+                        <a href="/tag/ghost-in-depth/">深度玩转 Ghost</a>
+                        <a href="/tag/ubuntu/">Ubuntu</a>
+                        <a href="/tag/aliyun-ecs/">阿里云服务器</a>
+                        <a href="/tag/nginx/">Nginx</a>
+                        <a href="/tag/bae/">BAE</a>
+                        <a href="/tag/theme/">Theme</a>
+                        <a href="/tag/customize-page/">自定义页面</a>
+                        <a href="/tag/static-page/">静态页面</a>
+                        <a href="/tag/upload/">上传</a>
+                        <a href="/tag/yong-hu-zhi-nan/">用户指南</a>
+                        <a href="/tag/sqlite/">sqlite</a>
+                        <a href="/tag-cloud/">...</a>
+                    </div>
+                </div>
+            </aside>
+            <aside id="navbar-example" class="col-md-1 sidebar hidden-xs hidden-sm">
+                <ul class="nav nav-tabs nav-pills nav-stacked" data-spy="affix">
+                    <li class="active"><a href="#0" style="font-size: 0.78em">最近</a></li>
+                    <li><a href="#">2015</a></li>
+                    <li class="month"><a href="#1">3月</a></li>
+                    <li class="month"><a href="#2">1月</a></li>
+                    <li><a href="#">2014</a></li>
+                    <li class="month"><a href="#3">6月</a></li>
+                    <li class="month"><a href="#4">2月</a></li>
+                    <li><a href="#">2013</a></li>
+                    <li class="month"><a href="#5">7月</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+
+}{
+<script>
+$(".navbar-nav a").click(function (e) {
+        $(this).tab("show")
+    })
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            trigger: 'focus',
+            html: true,
+            content:'<ul class="list-group article-manipulate"><li class="list-group-item"><a href="#">删除</a></li><li class="list-group-item"><a href="#">收藏</a></li></ul>',
+            delay: { "show": 0, "hide": 500 }
+        })
+    })
+    $('body').scrollspy({ target: '#navbar-example' })
+    /*$('[data-spy="scroll"]').each(function () {
+        var $spy = $(this).scrollspy('refresh')
+    })*/
+    $('[data-spy="affix"]').affix({
+        offset: {
+            top: 150
+        }
+    })
+</script>
 }
