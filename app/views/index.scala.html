@@ -380,22 +380,33 @@
             $("#hint").text("请您输入验证码")
             return
         }
-        $.post("/login",
-        {
-            username:inputusername,
-            password:inputpassword,
-            validatecode:inputvalidatecode
-        },
-        function(data,status){
-            if(data!="ok"){
-                $("#hint").text(data)
-                refreshvalidatecode()
-            }
-            else{
-                $("#hint").text("")
-                document.getElementById('loginform').submit()
-            }
-        });
+
+        $.get("/getpublickey",function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status);
+            var tmp = data.split('||')
+            var modulus = tmp[0]
+            var exponent = tmp[1]
+            var key = RSAUtils.getKeyPair(exponent, '', modulus)
+            inputpassword = RSAUtils.encryptedString(key, inputpassword)
+            //alert(inputpassword)
+            $.post("/login",
+            {
+                username:inputusername,
+                password:inputpassword,
+                validatecode:inputvalidatecode
+            },
+            function(data,status){
+                if(data!="ok"){
+                    $("#hint").text(data)
+                    refreshvalidatecode()
+                }
+                else{
+                    $("#hint").text("")
+
+                    //document.getElementById('loginform').submit()
+                }
+            })
+        })
     }
     var checkregistform = function(){
         var inputusername = document.getElementById('InputUsernameregist').value
@@ -433,24 +444,34 @@
             $("#hintregist").text("请您输入验证码")
             return
         }
-        $.post("/regist",
-        {
-            username:inputusername,
-            password:inputpassword,
-            confirmpassword:inputconfirmpassword,
-            validatecode:inputvalidatecode
-        },
-        function(data,status){
-            //alert("Data: " + data + "\nStatus: " + status)
-            if(data!="ok"){
-                $("#hintregist").text(data)
-                refreshvalidatecode()
-            }
-            else{
-                $("#hintregist").text("")
-                document.getElementById('registform').submit()
-            }
-        });
+        $.get("/getpublickey",function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status);
+            var tmp = data.split('||')
+            var modulus = tmp[0]
+            var exponent = tmp[1]
+            var key = RSAUtils.getKeyPair(exponent, '', modulus)
+            inputpassword = RSAUtils.encryptedString(key, inputpassword)
+            inputconfirmpassword = RSAUtils.encryptedString(key, inputconfirmpassword)
+
+            $.post("/regist",
+            {
+                username:inputusername,
+                password:inputpassword,
+                confirmpassword:inputconfirmpassword,
+                validatecode:inputvalidatecode
+            },
+            function(data,status){
+                //alert("Data: " + data + "\nStatus: " + status)
+                if(data!="ok"){
+                    $("#hintregist").text(data)
+                    refreshvalidatecode()
+                }
+                else{
+                    $("#hintregist").text("")
+                    document.getElementById('registform').submit()
+                }
+            })
+        })
     }
     $("#InputValidate").on('input',function(e){
        //console.log(this.value)

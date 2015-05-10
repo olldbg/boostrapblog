@@ -8,6 +8,7 @@ POST    /login                      controllers.Authorize.login
 POST    /regist                     controllers.Authorize.regist
 GET     /captcha                    controllers.kcaptcha.captcha
 GET     /validatecodeajax           controllers.ajax.validatecode.validate
+GET     /getpublickey               controllers.ajax.ras.getpublickey
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

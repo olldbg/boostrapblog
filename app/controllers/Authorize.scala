@@ -1,5 +1,6 @@
 package controllers
 
+import controllers.utils.RSAUtils
 import play.api._
 import play.api.mvc._
 
@@ -24,14 +25,17 @@ object Authorize extends Controller{
       )
     )
 
-    val (username, password,validatecode) = loginForm.bindFromRequest.get
+    val (username, passwordencrypt,validatecode) = loginForm.bindFromRequest.get
+
+    var password = RSAUtils.decryptStringByJs(passwordencrypt)
+
     var gencode = request.session.get("MYCAPTCHA").get
     //print(gencode+"\n")
     var inputcode = getHash(getHash(validatecode.toLowerCase,"sha")+"scala","md5")
     //print(inputcode+"\n")
     var message = ""
     var truepassword = user.getpasswordbyname(username)
-    print(truepassword)
+    //print(truepassword)
     if(inputcode.equals(gencode)==false) {
       //var u = new user(username, password)
       //u.save
@@ -41,9 +45,11 @@ object Authorize extends Controller{
     }else if(truepassword.equals(password)==false) {
       message = "密码错误"
     }else{
+      print("登陆成功")
       message = "ok"
     }
-    Ok(message)
+    Ok(message).withSession(
+      "MYCAPTCHA" -> "empty")
   }
 
   def regist = Action { implicit request =>
@@ -55,7 +61,10 @@ object Authorize extends Controller{
         "validatecode" -> text
       )
     )
-    val (username, password ,confirmpassword ,validatecode) = loginForm.bindFromRequest.get
+    val (username, passwordencrypt ,confirmpasswordencrypt ,validatecode) = loginForm.bindFromRequest.get
+    //print("//"+username+":"+passwordencrypt+":"+confirmpasswordencrypt+":"+validatecode)
+    var password = RSAUtils.decryptStringByJs(passwordencrypt)
+    var confirmpassword = RSAUtils.decryptStringByJs(confirmpasswordencrypt)
     //print("//"+username+":"+password+":"+confirmpassword+":"+validatecode)
     val gencode = request.session.get("MYCAPTCHA").get
 

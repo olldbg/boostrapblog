@@ -8,6 +8,7 @@ import play.api.db.DB
 import play.api.Play.current
 
 import models._;
+import utils.RSAUtils._
 
 object Application extends Controller {
 
@@ -41,7 +42,9 @@ object Application extends Controller {
 //    user.deleteuserbyname("name3")
 //    print(user.getpasswordbyname("name2"))
 //    user.isuserexist("cdscs")
-
+//    var a = encryptString("123")
+//    print(a+"\n")
+//    print("解:"+decryptString(a))
     Ok(views.html.index("Your new application is ready."))
   }
 
