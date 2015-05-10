@@ -89,4 +89,16 @@ object user {
       val result: Int = SQL("delete from user where username = {username}").on('username -> name).executeUpdate()
     }
   }
+
+  def isuserexist(name: String):Boolean = {
+    DB.withConnection { implicit c =>
+      val firstRow = SQL("Select count(*) as c from user where username = {username}").on('username -> name).apply().head
+      val count = firstRow[Long]("c")
+      //print(count)
+      if(count==0)
+        false
+      else
+        true
+    }
+  }
 }

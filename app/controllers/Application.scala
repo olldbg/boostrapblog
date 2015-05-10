@@ -40,6 +40,8 @@ object Application extends Controller {
 //      }
 //    user.deleteuserbyname("name3")
 //    print(user.getpasswordbyname("name2"))
+//    user.isuserexist("cdscs")
+
     Ok(views.html.index("Your new application is ready."))
   }
 

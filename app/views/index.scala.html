@@ -24,30 +24,29 @@
                         <li role="presentation"><a href="#regist" aria-controls="profile" role="tab"
                                                    data-toggle="tab">注册</a></li>
                     </ul>
-                    <div id="hint" style="min-height: 20px;color: #ff0000">
-                    </div>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="loggin">
-                            <form id="loginform" action="/login" method="post">
+                            <div id="hint" style="min-height: 20px;color: #ff0000">
+                            </div>
+                            <form id="loginform" action="/" method="post">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                                         <input type="text" class="form-control" id="InputUsername"
-                                               placeholder="用户名" name="username">
+                                               placeholder="用户名">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
                                         <input type="password" class="form-control" id="InputPassword"
-                                               placeholder="密码" name="password">
+                                               placeholder="密码">
                                     </div>
                                 </div>
                                 <div class="form-group form-inline">
-                                    <input type="text" class="form-control" placeholder="验证码" id="InputValidate" name="validatecode">
-                                    <img src="@routes.Assets.at("images/genimage")">
-                                    <img id="captchaImg" style="width:100px;height:30px;" src="/captcha?randomID=${randomID}">
-                                    <a href="#">换一张</a>
+                                    <input type="text" class="form-control" placeholder="验证码" id="InputValidate">
+                                    <img id="captcha" src="/captcha">
+                                    <a href="javascript:" onclick="refreshvalidatecode()">换一张</a>
                                 </div>
                                 <div class="form-group form-inline">
                                     <input type="checkbox" checked>
@@ -61,25 +60,38 @@
                             </form>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="regist">
-                            <form>
+                            <div id="hintregist" style="min-height: 20px;color: #ff0000">
+                            </div>
+                            <form id="registform" action="/" method="post">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail2">用户名</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail2"
-                                           placeholder="请输入用户名">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+                                        <input type="text" class="form-control" id="InputUsernameregist"
+                                               placeholder="用户名（6-10个字母或汉字）">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword2">密码</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword2"
-                                           placeholder="请输入密码">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                                        <input type="password" class="form-control" id="InputPasswordregist"
+                                               placeholder="密码">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword3">确认密码</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword3"
-                                           placeholder="请输入确认密码">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="glyphicon glyphicon-check"></span></div>
+                                        <input type="password" class="form-control" id="InputPasswordconfirmregist"
+                                               placeholder="确认密码">
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
+                                    <input id="InputValidateregist" type="text" class="form-control" placeholder="验证码">
+                                    <img id="captcharegist" src="/captcha">
+                                    <a href="javascript:" onclick="refreshvalidatecode()">换一张</a>
                                 </div>
                                 <div class="login-button clearfix">
                                     <button type="button" class="btn btn-default pull-right" data-dismiss="modal" aria-label="Close">关闭</button>
-                                    <button type="submit" class="btn btn-primary pull-right">注册</button>
+                                    <a href="javascript:checkregistform()" class="btn btn-primary pull-right">注册</a>
                                 </div>
                             </form>
                         </div>
@@ -317,7 +329,7 @@
 
 }{
 <script>
-$(".navbar-nav a").click(function (e) {
+    $(".navbar-nav a").click(function (e) {
         $(this).tab("show")
     })
     $(function () {
@@ -337,7 +349,22 @@ $(".navbar-nav a").click(function (e) {
             top: 150
         }
     })
+    var refreshvalidatecode = function(){
+         var ran = Math.random()
+         document.getElementById('captcha').src='/captcha?'+ran
+         document.getElementById('captcharegist').src='/captcha?'+ran
+         if($('#validate-ok')!=null)
+            $('#validate-ok').remove()
+         if($('#validate-ok-regist')!=null)
+            $('#validate-ok-regist').remove()
+         document.getElementById('InputValidate').value=""
+         document.getElementById('InputValidateregist').value=""
+    }
     var checkloginform = function(){
+        var inputusername = document.getElementById('InputUsername').value
+        var inputpassword = document.getElementById('InputPassword').value
+        var inputvalidatecode = document.getElementById('InputValidate').value
+
         if(document.getElementById('InputUsername').value=='')
         {
             $("#hint").text("请您输入用户名")
@@ -353,7 +380,135 @@ $(".navbar-nav a").click(function (e) {
             $("#hint").text("请您输入验证码")
             return
         }
-        document.getElementById('loginform').submit()
+        $.post("/login",
+        {
+            username:inputusername,
+            password:inputpassword,
+            validatecode:inputvalidatecode
+        },
+        function(data,status){
+            if(data!="ok"){
+                $("#hint").text(data)
+                refreshvalidatecode()
+            }
+            else{
+                $("#hint").text("")
+                document.getElementById('loginform').submit()
+            }
+        });
     }
+    var checkregistform = function(){
+        var inputusername = document.getElementById('InputUsernameregist').value
+        var inputpassword = document.getElementById('InputPasswordregist').value
+        var inputconfirmpassword = document.getElementById('InputPasswordconfirmregist').value
+        var inputvalidatecode = document.getElementById('InputValidateregist').value
+
+        if(inputusername =='')
+        {
+            $("#hintregist").text("请您输入用户名")
+            return
+        }
+        if(inputusername.length<6)
+        {
+            $("#hintregist").text("用户名过短")
+            return
+        }
+        if(inputusername.length>10)
+        {
+            $("#hintregist").text("用户名过短过长")
+            return
+        }
+        if(inputpassword =='')
+        {
+            $("#hintregist").text("请您输入密码")
+            return
+        }
+        if(inputpassword!=inputconfirmpassword)
+        {
+            $("#hintregist").text("两次输入的密码不一样")
+            return
+        }
+        if(inputvalidatecode=='')
+        {
+            $("#hintregist").text("请您输入验证码")
+            return
+        }
+        $.post("/regist",
+        {
+            username:inputusername,
+            password:inputpassword,
+            confirmpassword:inputconfirmpassword,
+            validatecode:inputvalidatecode
+        },
+        function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status)
+            if(data!="ok"){
+                $("#hintregist").text(data)
+                refreshvalidatecode()
+            }
+            else{
+                $("#hintregist").text("")
+                document.getElementById('registform').submit()
+            }
+        });
+    }
+    $("#InputValidate").on('input',function(e){
+       //console.log(this.value)
+       document.getElementById('InputValidateregist').value=this.value
+       if(this.value.length==5)
+       {
+            $.get("/validatecodeajax?code="+this.value,function(data,status){
+                 //$(this).append(data);
+                 //console.log("Data: " + data + "\nStatus: " + status);
+
+                if(data=="true")
+                {
+                     //alert("123")
+                     $('#captcha').before("<span id='validate-ok' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
+                     $('#captcharegist').before("<span id='validate-ok-regist' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
+                }else{
+                    if($('#validate-ok')!=null)
+                         $('#validate-ok').remove()
+                    if($('#validate-ok-regist')!=null)
+                         $('#validate-ok-regist').remove()
+                }
+       })
+       }else{
+            if($('#validate-ok')!=null)
+                $('#validate-ok').remove()
+            if($('#validate-ok-regist')!=null)
+                $('#validate-ok-regist').remove()
+       }
+
+    })
+    $("#InputValidateregist").on('input',function(e){
+        document.getElementById('InputValidate').value=this.value
+        if(this.value.length==5)
+        {
+            $.get("/validatecodeajax?code="+this.value,function(data,status){
+                if(data=="true")
+                {
+                     $('#captcha').before("<span id='validate-ok' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
+                     $('#captcharegist').before("<span id='validate-ok-regist' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
+                }else{
+                    if($('#validate-ok')!=null)
+                         $('#validate-ok').remove()
+                    if($('#validate-ok-regist')!=null)
+                         $('#validate-ok-regist').remove()
+                }
+       })
+       }else{
+            if($('#validate-ok')!=null)
+                $('#validate-ok').remove()
+            if($('#validate-ok-regist')!=null)
+                $('#validate-ok-regist').remove()
+       }
+    })
+    $('#InputUsername').on('input',function(e){
+        document.getElementById('InputUsernameregist').value=this.value
+    })
+    $('#InputUsernameregist').on('input',function(e){
+        document.getElementById('InputUsername').value=this.value
+    })
 </script>
 }
