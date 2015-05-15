@@ -1,0 +1,225 @@
+@(message: String,alert: String,bloglist: java.util.ArrayList[blogs])
+
+@main("Blog"){
+    @if(alert.equals("")==false){
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @alert
+    </div>
+    }
+}{
+<style>
+    .navbar-header .navbar-brand{
+    padding: 0;
+    }
+
+    .navbar-header .navbar-brand img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    }
+</style>
+<a class="navbar-brand" href="#" data-toggle="headphotopopover" data-trigger="focus" data-placement="bottom">
+    <img src="@routes.Assets.at("images/test.png")" alt="头像"></a>
+}{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 style="color: #e67e22">写博客</h4>
+                </div>
+                <div class="modal-body" style="padding-top: 0">
+                    <div id="bloghint" style="min-height: 20px;color: #ff0000"></div>
+                    <input id="mytitle" type="text" class="form-control" placeholder="标题" style="margin-bottom: 10px">
+                    <textarea id="myarticle" class="ckeditor" ></textarea>
+                </div>
+                <div class="modal-footer">
+
+                    <div class="dropdown" style="display: inline-block;margin-right: 10px">
+                        <a id="scope" href="#" id="dropdownMenu1" data-toggle="dropdown" ><div style="display: inline-block">公开</div><span class="glyphicon glyphicon-menu-down"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:$('#scope div').text('公开')"><span class="glyphicon glyphicon-eye-open" style="color: white; padding: 3px;border-radius: 20px; margin-right: 5px;background: #b9def0"></span>公开</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:$('#scope div').text('好友圈')"><span class="glyphicon glyphicon-heart" style="color: white;padding: 3px;border-radius: 20px; margin-right: 5px;background: hotpink"></span>好友圈</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:$('#scope div').text('仅自己可见')"><span class="glyphicon glyphicon-lock" style="color: white;padding: 3px;border-radius: 20px; margin-right: 5px;background: blueviolet"></span>仅自己可见</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="postblog()">发布</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+
+                    @for(i <- 0 until bloglist.size()){
+
+                    <article id="1" class="post tag-about-ghost tag-release">
+
+                        <div class="post-head">
+                            <a href="javascript:" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="bottom"><span class="glyphicon glyphicon-menu-down"></span></a>
+                            <h1 class="post-title"><a href="/ghost-0-6-0-released/">@bloglist.get(i).title</a></h1>
+                            <div class="post-meta">
+                                <span class="author">作者：<a href="/author/wangsai/">@bloglist.get(i).author</a></span> &bull;
+                                <time class="date" datetime="@bloglist.get(i).publishtime">@bloglist.get(i).getformatetime()</time>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p>@Html(bloglist.get(i).getarticle)</p>
+                        </div>
+                        <div class="post-permalink">
+                            <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                        </div>
+
+                        <footer class="post-footer clearfix">
+                            <div class="pull-left tag-list">
+                                <i class="fa fa-folder-open-o"></i>
+                                <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">展开评论</a>
+                            </div>
+                        </footer>
+                        <div class="collapse" id="collapseExample" style="margin-top: 10px">
+                            <div class="well">
+                                <div class="commentbox clearfix">
+                                    <input type="text" class="form-control">
+                                    <button type="button" class="btn btn-default pull-right" style="margin: 10px 0">评论</button>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="..." alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Media heading</h4>
+                                        ...
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="..." alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Media heading</h4>
+                                        ...
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="..." alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Media heading</h4>
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    }
+                </main>
+                <aside class="col-md-3 sidebar hidden-xs hidden-sm">
+                    <div class="widget" data-spy="affix">
+                        <h4 class="title">标签云</h4>
+
+                        <div class="content tag-cloud">
+                            <a href="/tag/about-ghost/">Ghost</a>
+                            <a href="/tag/release/">新版本发布</a>
+                            <a href="/tag/javascript/">JavaScript</a>
+                            <a href="/tag/promise/">Promise</a>
+                            <a href="/tag/zhuti/">主题</a>
+                            <a href="/tag/mysql/">MySQL</a>
+                            <a href="/tag/nodejs/">Node.js</a>
+                            <a href="/tag/ghost-in-depth/">深度玩转 Ghost</a>
+                            <a href="/tag/ubuntu/">Ubuntu</a>
+                            <a href="/tag/aliyun-ecs/">阿里云服务器</a>
+                            <a href="/tag/nginx/">Nginx</a>
+                            <a href="/tag/bae/">BAE</a>
+                            <a href="/tag/theme/">Theme</a>
+                            <a href="/tag/customize-page/">自定义页面</a>
+                            <a href="/tag/static-page/">静态页面</a>
+                            <a href="/tag/upload/">上传</a>
+                            <a href="/tag/yong-hu-zhi-nan/">用户指南</a>
+                            <a href="/tag/sqlite/">sqlite</a>
+                            <a href="/tag-cloud/">...</a>
+                        </div>
+                    </div>
+                </aside>
+                <aside id="navbar-example" class="col-md-1 sidebar hidden-xs hidden-sm">
+                    <ul class="nav nav-tabs nav-pills nav-stacked" data-spy="affix">
+                        <li class="active"><a href="#0" style="font-size: 0.78em">最近</a></li>
+                        <li><a href="#">2015</a></li>
+                        <li class="month"><a href="#1">3月</a></li>
+                        <li class="month"><a href="#2">1月</a></li>
+                        <li><a href="#">2014</a></li>
+                        <li class="month"><a href="#3">6月</a></li>
+                        <li class="month"><a href="#4">2月</a></li>
+                        <li><a href="#">2013</a></li>
+                        <li class="month"><a href="#5">7月</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+ }{
+<script>
+    $(function(){
+        $('#searchform').before('<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit" style="font-size: 1.6em;vertical-align: middle;color: #ffffff;background: #e67e22;padding: 3px;border-radius: 5px"></span></a>')
+    })
+    $(function () {
+        $('[data-toggle="headphotopopover"]').popover({
+            trigger: 'focus',
+            html: true,
+            content:'<div class="container-fluid" style="width: 200px"><div class="usercard"><img class="img-circle" style="width: 70px;height: 70px" src="@routes.Assets.at("images/test.png")"><p>用户名</p><p style="line-height: 0">个性签名</p></div>' +
+            '<div class="usercardbody">最近文章：<div class="recentartical"><h4>标题</h4>正文部分</div></div>' +
+            '<div class="usercardfooter"><div class="pull-right"><a href="#" >消息</a>|<a href="#">设置</a>|<a href="javascript:logout()">注销</a></div></div></div>',
+            delay: { "show": 0, "hide": 500 }
+        })
+    })
+    $('[data-toggle="headphotopopover"]').hover(function(){
+        $(this).focus()
+    })
+    $('.post').hover(function(){
+        $('[data-toggle="headphotopopover"]').blur()
+    })
+    var logout = function(){
+        $.get("/logout",function(data,status){
+            window.location.href="/"
+        })
+    }
+    var postblog = function(){
+        var mytitle = $('#mytitle').val()
+        //alert(title)
+        var myarticle = CKEDITOR.instances.myarticle.getData()
+        //alert(myarticle)
+        $.post("/postblog",
+        {
+            title: mytitle,
+            article: myarticle
+        },function(data,status){
+          //alert("Data: " + data + "\nStatus: " + status);
+          if(data!="ok")
+          {
+            $("#bloghint").text(data)
+          } else
+          {
+            $("#bloghint").text("")
+            //$('#myModal').modal('hide')
+            window.location.href="/"
+          }
+        });
+    }
+
+</script>
+}

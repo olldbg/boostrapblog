@@ -15,18 +15,19 @@ class user(var username: String, var password: String) {
   var phonenumber = ""
   var headphoto = ""
   var sign = ""
+  var session = ""
 
   def save = {
     DB.withConnection { implicit c =>
-      val id: Option[Long] = SQL("insert into user values ({username}, {password},{sex},{email},{birthday},{phonenumber},{headphoto},{sign})")
-        .on('username -> username, 'password -> password, 'sex -> sex, 'email -> email, 'birthday -> birthday, 'phonenumber -> phonenumber, 'headphoto -> headphoto, 'sign -> sign).executeInsert()
+      val id: Option[Long] = SQL("insert into user values ({username}, {password},{sex},{email},{birthday},{phonenumber},{headphoto},{sign},{session})")
+        .on('username -> username, 'password -> password, 'sex -> sex, 'email -> email, 'birthday -> birthday, 'phonenumber -> phonenumber, 'headphoto -> headphoto, 'sign -> sign, 'session -> session).executeInsert()
     }
   }
 
   def update = {
     DB.withConnection { implicit c =>
-      val result: Int = SQL("update user set password={password}, sex={sex}, email={email}, birthday={birthday}, phonenumber={phonenumber}, headphoto={headphoto}, sign={sign} where username = {username}")
-        .on('username -> username, 'password -> password, 'sex -> sex, 'email -> email, 'birthday -> birthday, 'phonenumber -> phonenumber, 'headphoto -> headphoto, 'sign -> sign).executeUpdate()
+      val result: Int = SQL("update user set password={password}, sex={sex}, email={email}, birthday={birthday}, phonenumber={phonenumber}, headphoto={headphoto}, sign={sign}, session={session} where username = {username}")
+        .on('username -> username, 'password -> password, 'sex -> sex, 'email -> email, 'birthday -> birthday, 'phonenumber -> phonenumber, 'headphoto -> headphoto, 'sign -> sign, 'session -> session).executeUpdate()
     }
   }
 
@@ -62,6 +63,7 @@ object user {
         u.phonenumber = head[String]("phonenumber")
         u.headphoto = head[String]("headphoto")
         u.sign = head[String]("sign")
+        u.session = head[String]("session")
         u
       } else {
         Unit
@@ -99,6 +101,32 @@ object user {
         false
       else
         true
+    }
+  }
+
+  def setsession(username: String,session: String) = {
+    var u = user.getuserbyname(username)
+    if(u.isInstanceOf[user])
+    {
+      var u1 = u.asInstanceOf[user]
+      u1.session = session
+      u1.update
+      true
+    }else
+    {
+      false
+    }
+  }
+
+  def getsession(username: String) = {
+    var u = user.getuserbyname(username)
+    if(u.isInstanceOf[user])
+    {
+      var u1 = u.asInstanceOf[user]
+      u1.session
+    }else
+    {
+      "user not found"
     }
   }
 }

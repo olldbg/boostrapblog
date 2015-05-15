@@ -1,4 +1,4 @@
-@(title: String)(alert: Html)(content: Html)(script: Html)
+@(title: String)(alert: Html)(headphoto: Html)(content: Html)(script: Html)
 
 <!DOCTYPE html>
 
@@ -26,20 +26,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
-                    <span class="glyphicon glyphicon-user"></span></a>
+                @headphoto
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html">首页</a></li>
-                    <li><a href="photo.html">相册</a></li>
+                    <li class="active"><a href="/">首页</a></li>
+                    <li><a href="/photo.php">相册</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="输入搜索的内容">
-                    </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
-                </form>
+                <div class="navbar-right">
+                    <form id="searchform" class="navbar-form " style="display: inline-block" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="输入搜索的内容">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -53,12 +54,33 @@
 <script type="text/javascript" src="@routes.Assets.at("javascripts/fancyBox/source/jquery.fancybox.js?v=2.1.5")"></script>
 <script src="@routes.Assets.at("javascripts/icheck-1.x/icheck.min.js")"></script>
 <script src="@routes.Assets.at("javascripts/security.js")"></script>
+<script src="@routes.Assets.at("javascripts/ckeditor/ckeditor.js")"></script>
 <script>
     $(function(){
         $('input').iCheck({
             checkboxClass: 'icheckbox_flat-orange',
             radioClass: 'iradio_flat-orange',
             increaseArea: '20%' // optional
+        })
+    })
+    $('body').scrollspy({ target: '#navbar-example' })
+
+    $('[data-spy="affix"]').affix({
+        offset: {
+            top: 150
+        }
+    })
+
+        $(".navbar-nav a").click(function (e) {
+        $(this).tab("show")
+    })
+
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            trigger: 'focus',
+            html: true,
+            content:'<ul class="list-group article-manipulate"><li class="list-group-item"><a href="#">删除</a></li><li class="list-group-item"><a href="#">收藏</a></li></ul>',
+            delay: { "show": 0, "hide": 500 }
         })
     })
 </script>

@@ -1,11 +1,14 @@
 @(message: String)
 
-@main("Welcome to Play"){
+@main("Blog"){
 <div class="alert alert-warning alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
     您还没有登陆，请<a href="#" data-toggle="modal" data-target="#myModal">登陆</a>
 </div>
+}{
+<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
+    <span class="glyphicon glyphicon-user"></span></a>
 }{
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -329,26 +332,7 @@
 
 }{
 <script>
-    $(".navbar-nav a").click(function (e) {
-        $(this).tab("show")
-    })
-    $(function () {
-        $('[data-toggle="popover"]').popover({
-            trigger: 'focus',
-            html: true,
-            content:'<ul class="list-group article-manipulate"><li class="list-group-item"><a href="#">删除</a></li><li class="list-group-item"><a href="#">收藏</a></li></ul>',
-            delay: { "show": 0, "hide": 500 }
-        })
-    })
-    $('body').scrollspy({ target: '#navbar-example' })
-    /*$('[data-spy="scroll"]').each(function () {
-        var $spy = $(this).scrollspy('refresh')
-    })*/
-    $('[data-spy="affix"]').affix({
-        offset: {
-            top: 150
-        }
-    })
+
     var refreshvalidatecode = function(){
          var ran = Math.random()
          document.getElementById('captcha').src='/captcha?'+ran
@@ -402,7 +386,7 @@
                 }
                 else{
                     $("#hint").text("")
-
+                    window.location.href="/"
                     //document.getElementById('loginform').submit()
                 }
             })
@@ -426,7 +410,7 @@
         }
         if(inputusername.length>10)
         {
-            $("#hintregist").text("用户名过短过长")
+            $("#hintregist").text("用户名过长")
             return
         }
         if(inputpassword =='')
@@ -468,7 +452,8 @@
                 }
                 else{
                     $("#hintregist").text("")
-                    document.getElementById('registform').submit()
+                    window.location.href="/"
+                    //document.getElementById('registform').submit()
                 }
             })
         })
@@ -485,7 +470,7 @@
                 if(data=="true")
                 {
                      //alert("123")
-                     $('#captcha').before("<span id='validate-ok' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
+                     $('#captcha').before("<span id='validate-ok' class='glyphicon glyphicon-ok' style='color:#00ff00; vertical-align:middle'></span>")
                      $('#captcharegist').before("<span id='validate-ok-regist' class='glyphicon glyphicon-ok' style='color:#00ff00;font-size:1.3em;vertical-align:middle'></span>")
                 }else{
                     if($('#validate-ok')!=null)
