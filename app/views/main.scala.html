@@ -12,8 +12,14 @@
     <link href="@routes.Assets.at("stylesheets/blog.css")" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("javascripts/fancyBox/source/jquery.fancybox.css?v=2.1.5")" media="screen"/>
     <link href="@routes.Assets.at("javascripts/icheck-1.x/skins/all.css")" rel="stylesheet">
+    <style>
+        html,body{
+            background-image: url('@routes.Assets.at("images/4.jpg")');
+        }
+    </style>
 </head>
 <body>
+    @*<div style="position:fixed; left:0; top:0; width:100%;"><img src="@routes.Assets.at("images/4.jpg")" width=100% height=100%></div>*@
 <div id="0" class="container">
     @alert
     <nav class="navbar navbar-default">
@@ -73,15 +79,6 @@
 
         $(".navbar-nav a").click(function (e) {
         $(this).tab("show")
-    })
-
-    $(function () {
-        $('[data-toggle="popover"]').popover({
-            trigger: 'focus',
-            html: true,
-            content:'<ul class="list-group article-manipulate"><li class="list-group-item"><a href="#">删除</a></li><li class="list-group-item"><a href="#">收藏</a></li></ul>',
-            delay: { "show": 0, "hide": 500 }
-        })
     })
 </script>
 @script

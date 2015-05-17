@@ -1,7 +1,7 @@
 @(message: String)
 
 @main("Blog"){
-<div class="alert alert-warning alert-dismissible" role="alert">
+<div class="alert alert-warning alert-dismissible" role="alert" style="opacity: 0.9">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
     您还没有登陆，请<a href="#" data-toggle="modal" data-target="#myModal">登陆</a>
@@ -109,11 +109,11 @@
 <section class="content-wrap">
     <div class="container">
         <div class="row">
-            <main class="col-md-8 main-content">
+            <main class="col-md-8 main-content" style="opacity: 0.9">
                 <article id="1" class="post tag-about-ghost tag-release">
 
                     <div class="post-head">
-                        <a href="javascript:" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="bottom"><span class="glyphicon glyphicon-menu-down"></span></a>
+                        <a href="javascript:" data-toggle="modal" data-target="#myModal" class="pull-right"><span class="glyphicon glyphicon-menu-down"></span></a>
                         <h1 class="post-title"><a href="/ghost-0-6-0-released/">Ghost 0.6.0 版本正式发布</a></h1>
                         <div class="post-meta">
                             <span class="author">作者：<a href="/author/wangsai/">王赛</a></span> &bull;
@@ -286,7 +286,7 @@
                     </footer>
                 </article>
             </main>
-            <aside class="col-md-3 sidebar hidden-xs hidden-sm">
+            <aside class="col-md-3 sidebar hidden-xs hidden-sm" style="opacity: 0.9">
                 <div class="widget" data-spy="affix">
                     <h4 class="title">标签云</h4>
 

@@ -42,6 +42,23 @@ class user(var username: String, var password: String) {
       }
     }
   }
+
+  def getrecentblog() ={
+    DB.withConnection { implicit c =>
+      val result = SQL(
+        """
+      select * from blogs where author = {username} order by publishtime desc
+        """
+      ).on('username -> username).apply().toList
+      if (result.length != 0) {
+        val head = result(0)
+        var b = new blogs(head[String]("author"),head[String]("publishtime"))
+        b.title = head[String]("title")
+        b.scope = head[String]("scope")
+        b
+      }
+    }
+  }
 }
 
 object user {
@@ -129,4 +146,5 @@ object user {
       "user not found"
     }
   }
+
 }

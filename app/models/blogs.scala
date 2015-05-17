@@ -66,5 +66,27 @@ object blogs{
     bs
   }
 
+  def getcount() =
+  {
+    DB.withConnection { implicit c =>
+      val result = SQL(
+        """
+      select count(*) as c from blogs
+        """
+      ).apply().toList
+      if (result.length != 0) {
+        val row = result(0)
+        row[Long]("c")
+      }else{
+        0
+      }
+    }
+  }
 
+  def deleteblog(author:String, publishtime: String) = {
+    DB.withConnection { implicit c =>
+      var blogid = publishtime + "||" + author
+      val result: Int = SQL("delete from blogs where blogid = {blogid}").on('blogid -> blogid).executeUpdate()
+    }
+  }
 }

@@ -165,10 +165,22 @@ body{
     position: relative;
 }
 
+#navbar-example ul{
+    border-bottom:0px !important;
+}
+
 #navbar-example li{
     width: 60px;
     font-size: 0.8em;
     border-left: 5px solid #e67e22;
+}
+
+#navbar-example li:hover{
+    opacity: 0.5
+}
+
+#navbar-example li a{
+    border: 0px;
 }
 
 .month{

@@ -66,4 +66,27 @@ object blogcontroller extends Controller {
       }
     }
   }
+
+  def deleteblog = Action { implicit request =>
+
+    val deleteForm = Form(
+      tuple(
+        "author" -> text,
+        "publishtime" -> text
+      )
+    )
+    var (author, publishtime) = deleteForm.bindFromRequest.get
+    var username = "empty"
+    var sessionid = "empty"
+    try {
+      username = request.session.get("user").get
+      sessionid = request.session.get("usersession").get
+    } catch {
+      case _: Exception => Unit
+    }
+    if (sessionid.equals("empty") == false&&sessionid.equals(user.getsession(author))) {
+      blogs.deleteblog(author,publishtime)
+    }
+    Ok("").withSession("user" -> username, "usersession" -> (sessionid + ""), "alertmessage" -> "ok")
+  }
 }

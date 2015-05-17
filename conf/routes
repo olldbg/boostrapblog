@@ -8,6 +8,7 @@ GET         /logout                  controllers.Authorize.logout
 POST        /login                   controllers.Authorize.login
 POST        /regist                  controllers.Authorize.regist
 POST        /postblog                controllers.blogcontroller.postblog
+POST        /deleteblog              controllers.blogcontroller.deleteblog
 GET         /captcha                 controllers.kcaptcha.captcha
 GET         /validatecodeajax        controllers.ajax.validatecode.validate
 GET         /getpublickey            controllers.ajax.rsa.getpublickey

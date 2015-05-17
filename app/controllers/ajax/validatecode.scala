@@ -10,8 +10,15 @@ import play.api.mvc._
 object validatecode extends Controller {
   def validate = Action { implicit request =>
     //print(request.queryString.get("code").get.mkString)
-    var inputcode = request.queryString.get("code").get.mkString
-    var gencode = request.session.get("MYCAPTCHA").get
+    var inputcode = ""
+    var gencode = "empty"
+    try{
+      inputcode = request.queryString.get("code").get.mkString
+      gencode = request.session.get("MYCAPTCHA").get
+    }catch {
+      case _: Exception => Unit
+    }
+
     //print(gencode+"\n")
     inputcode = getHash(getHash(inputcode.toLowerCase,"sha")+"scala","md5")
     //print(inputcode+"\n")
