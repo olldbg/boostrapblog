@@ -1,0 +1,195 @@
+@(message: String)
+
+@main("Blog") {
+
+}{
+  <style>
+  .navbar-header .navbar-brand{
+  padding: 0;
+  }
+
+  .navbar-header .navbar-brand img{
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  }
+  </style>
+  <a class="navbar-brand" href="#" data-toggle="headphotopopover" data-trigger="focus" data-placement="bottom">
+    <img src="@routes.Assets.at("images/test.png")" alt="头像"></a>
+}{
+  <script>
+    $('#myindex').removeClass('active')
+    $('#myphoto').addClass('active')
+  </script>
+  <section class="content-wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <ol class="breadcrumb">
+            <li><a href="#">相册</a></li>
+            <li class="active">相册1</li>
+          </ol>
+        </div>
+        <div class="col-md-6">
+          <div class="pull-right">
+            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-up"
+            style="margin-right: 5px"></span>上传图片
+            </button>
+            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-folder-open"
+            style="margin-right: 5px"></span>新建相册
+            </button>
+            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"
+            style="margin-right: 5px"></span>下载
+            </button>
+            <div class="dropdown" style="display: inline-block">
+              <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" role="button"
+              aria-expanded="false">更多 <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">重命名</a></li>
+                <li><a href="#">移动到</a></li>
+                <li><a href="#">复制到</a></li>
+                <li><a href="#">删除</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" style="background: rgba(255,255,255,0.5);position: relative">
+        全选
+        <input type="checkbox">
+      </div>
+      <div id="masonry" class="photocontainer container-fluid" style="background: rgba(255,255,255,0.5);padding: 10px;min-width: 100%">
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/1.jpg")'><img src='@routes.Assets.at("images/1.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/2.jpg")'><img src='@routes.Assets.at("images/2.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/3.jpg")'><img src='@routes.Assets.at("images/3.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/4.jpg")'><img src='@routes.Assets.at("images/4.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/5.jpg")'><img src='@routes.Assets.at("images/5.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/6.jpg")'><img src='@routes.Assets.at("images/6.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/7.jpg")'><img src='@routes.Assets.at("images/7.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+        <div class="thumbnail">
+          <div>
+            名称
+            <div class="pull-right" style="margin-bottom: 5px">
+              <input type=checkbox>
+            </div>
+          </div>
+          <a class="fancybox" data-fancybox-group="gallery" href='@routes.Assets.at("images/8.jpg")'><img src='@routes.Assets.at("images/8.jpg")'>
+            <div class="caption">
+              <p>介绍</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+}{
+  <script>
+
+    $(function () {
+        var masonryNode = $('#masonry')
+        masonryNode.imagesLoaded(function () {
+            masonryNode.masonry({
+                itemSelector: '.thumbnail',
+                isFitWidth: true
+            })
+        })
+    })
+
+    $('.fancybox').fancybox()
+
+    $(function(){
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-orange',
+            radioClass: 'iradio_flat-orange',
+            increaseArea: '20%' // optional
+        })
+    })
+  </script>
+}

@@ -3,16 +3,20 @@
 # ~~~~
 
 # Home page
-GET         /                        controllers.Application.index
-GET         /logout                  controllers.Authorize.logout
-POST        /login                   controllers.Authorize.login
-POST        /regist                  controllers.Authorize.regist
-POST        /postblog                controllers.blogcontroller.postblog
-POST        /deleteblog              controllers.blogcontroller.deleteblog
-GET         /captcha                 controllers.kcaptcha.captcha
-GET         /validatecodeajax        controllers.ajax.validatecode.validate
-GET         /getpublickey            controllers.ajax.rsa.getpublickey
-GET         /photo.php               controllers.Application.photo
+GET         /                          controllers.Application.index
+GET         /clean                          controllers.Application.clean
+GET         /logout                    controllers.Authorize.logout
+POST        /login                     controllers.Authorize.login
+POST        /regist                    controllers.Authorize.regist
+POST        /postblog                  controllers.blogcontroller.postblog
+POST        /deleteblog                controllers.blogcontroller.deleteblog
+GET         /captcha                   controllers.kcaptcha.captcha
+GET         /validatecodeajax          controllers.ajax.validatecode.validate
+GET         /getpublickey              controllers.ajax.rsa.getpublickey
+GET         /photo.php                 controllers.Application.photo
+POST        /postcomment               controllers.commentcontroller.postcomment
+POST        /getcommentbyblogid        controllers.commentcontroller.getcommentbyblogid
+POST        /deletecomment             controllers.commentcontroller.deletecomment
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file            controllers.Assets.at(path="/public", file)
+GET         /assets/*file              controllers.Assets.at(path="/public", file)

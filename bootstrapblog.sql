@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS `bootstrapblog`.`user` (
   PRIMARY KEY (`username`)
 )charset=utf8;
 
+insert into `bootstrapblog`.`user` (username) values('')
+
 CREATE TABLE IF NOT EXISTS `bootstrapblog`.`blogs` (
   `blogid` VARCHAR(65) NOT NULL,
   `author` VARCHAR(20) NULL DEFAULT '',
@@ -41,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `bootstrapblog`.`comment` (
   `blogid` VARCHAR(65) NULL DEFAULT '',
   `commentuser` VARCHAR(20) NULL DEFAULT '',
   `commenttime` VARCHAR(45) NULL DEFAULT '',
+  `comment` VARCHAR(100) NULL DEFAULT '',
   `isreply` TINYINT(1) NULL DEFAULT 0,
   `replyuser` VARCHAR(20) NULL DEFAULT '',
   PRIMARY KEY (`id`),
@@ -123,4 +126,24 @@ CREATE TABLE IF NOT EXISTS `bootstrapblog`.`configure` (
     REFERENCES `bootstrapblog`.`user` (`username`)
 )charset=utf8;
 
+ALTER TABLE `bootstrapblog`.`comment`
+DROP FOREIGN KEY `fk_comment_1`,
+DROP FOREIGN KEY `fk_comment_2`,
+DROP FOREIGN KEY `fk_comment_3`;
 
+ALTER TABLE `bootstrapblog`.`comment`
+ADD CONSTRAINT `fk_comment_1`
+  FOREIGN KEY (`blogid`)
+  REFERENCES `bootstrapblog`.`blogs` (`blogid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_comment_2`
+  FOREIGN KEY (`commentuser`)
+  REFERENCES `bootstrapblog`.`user` (`username`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_comment_3`
+  FOREIGN KEY (`replyuser`)
+  REFERENCES `bootstrapblog`.`user` (`username`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;

@@ -39,6 +39,32 @@ class blogs(var author:String, var publishtime:String) {
 
 object blogs{
 
+  def getall() =
+  {
+    var bs = new ArrayList[blogs]()
+    DB.withConnection { implicit c =>
+      val result = SQL(
+        """
+      select * from blogs order by blogid desc
+        """
+      ).apply().toList
+      if (result.length != 0) {
+        var i = 0
+        while(i<result.length) {
+          val row = result(i)
+          val author = row[String]("author")
+          val publishtime = row[String]("publishtime")
+          var b = new blogs(author,publishtime)
+          b.title = row[String]("title")
+          b.scope = row[String]("scope")
+          i += 1
+          bs.add(b)
+        }
+      }
+    }
+    bs
+  }
+
   def getlist(lenth:Int, index:Int) =
   {
     var bs = new ArrayList[blogs]()

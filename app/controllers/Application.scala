@@ -60,6 +60,10 @@ object Application extends Controller {
       }
 
       var bloglist = blogs.getlist(5,page-1)
+
+      //test
+
+      //comment.deletecomment("1432174879273||abcdef","1432208618761")
 //      var i = 0
 //      while(i<list.size())
 //      {
@@ -69,6 +73,15 @@ object Application extends Controller {
 //      }
 //      for(i <- 0 until bloglist.size())
 //        print(bloglist.get(i).blogid+"\n")
+//      var cs = comment.getcommentbyblogid("1431865495848||123456")
+//      println(cs.size())
+//      for(i <- 0 until cs.size())
+//      {
+//         println(cs.get(i).blogid+"##"+cs.get(i).commentuser+"||"+cs.get(i).commenttime+"||"+cs.get(i).comment+"||"+cs.get(i).isreply+"||"+cs.get(i).replyuser)
+//      }
+      //endtest
+
+
       var u = user.getuserbyname(username)
       if(u.isInstanceOf[Unit]){
         Ok(views.html.index(""))
@@ -83,6 +96,48 @@ object Application extends Controller {
   }
 
   def photo = Action { implicit request =>
+    Ok(views.html.photo(""))
+  }
+
+  def clean = Action { implicit request =>
+    var file = new File("articlepool/trash")
+    if(file.exists()==false)
+    {
+      file.mkdirs()
+    }
+    file = new File("articlepool")
+    var files = file.listFiles()
+    //printf(files.toString)
+    var bs = blogs.getall()
+    var blogids = Set("")
+    var len = bs.size()
+    for(i <- 0 until len)
+    {
+      blogids+=bs.get(i).blogid
+    }
+//    for(i <- 0 until len)
+//    {
+//      println(blogids.get(i))
+//    }
+    var filenames = Set("")
+
+    for(i <- 0 until files.size)
+    {
+      if(files(i).isDirectory==false)
+      {
+        filenames+=files(i).getName
+      }
+    }
+    var result = filenames -- blogids
+    for(i <- result)
+    {
+      var oldfile = new File("articlepool/"+i)
+      var newfile = new File("articlepool/trash/"+i)
+      oldfile.renameTo(newfile)
+      //println(i)
+    }
+    //println(filenames.size+"##"+blogids.size+"##"+result.size)
     Ok("")
   }
+
 }

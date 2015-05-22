@@ -72,13 +72,30 @@
         </div>
     </div>
 
+    <div class="modal fade" id="confirmModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" style="color: red">警告</h4>
+                </div>
+                <div class="modal-body">
+                    确定要删除评论?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button onclick="ondeletecommentconfirmclick()" type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="content-wrap">
         <div class="container">
             <div class="row">
                 <main class="col-md-8 main-content">
 
                     @for(i <- 0 until bloglist.size()){
-
                     <article id="@(i+1)" class="post tag-about-ghost tag-release" style="opacity: 0.9">
 
                         <div class="post-head">
@@ -97,56 +114,24 @@
                             <p>@Html(bloglist.get(i).getarticle)</p>
                         </div>
                         <div class="post-permalink">
-                            <a href="/ghost-0-6-0-released/" class="btn btn-default">阅读全文</a>
+                            <a href="#" class="btn btn-default">阅读全文</a>
                         </div>
 
                         <footer class="post-footer clearfix">
                             <div class="pull-left tag-list">
                                 <i class="fa fa-folder-open-o"></i>
-                                <a href="/tag/about-ghost/">Ghost</a><a href="/tag/release/">新版本发布</a>
+                                <a href="#">标签</a><a href="#">标签</a>
                             </div>
                             <div class="pull-right">
-                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample@i" aria-expanded="false" aria-controls="collapseExample">展开评论</a>
+                                <a class="btn btn-primary unfoldbutton" data-toggle="collapse" href="#collapseExample@i" onclick="onunfoldclick(this,'@bloglist.get(i).blogid','@bloglist.get(i).author','@(i+1)')" aria-expanded="false" aria-controls="collapseExample">展开评论</a>
+                                <a class="btn btn-primary hidden foldbutton" data-toggle="collapse" href="#collapseExample@i" onclick="onfoldclick(this)" aria-expanded="false" aria-controls="collapseExample">收起评论</a>
                             </div>
                         </footer>
                         <div class="collapse" id="collapseExample@i" style="margin-top: 10px">
                             <div class="well">
                                 <div class="commentbox clearfix">
-                                    <input type="text" class="form-control">
-                                    <button type="button" class="btn btn-default pull-right" style="margin: 10px 0">评论</button>
-                                </div>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="..." alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        ...
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="..." alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        ...
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <a href="#">
-                                            <img class="media-object" src="..." alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        ...
-                                    </div>
+                                    <input id="commentid@i" type="text" class="form-control">
+                                    <button type="button" onclick="oncommentclick(this,'@bloglist.get(i).author','@bloglist.get(i).publishtime','@(i+1)')" class="btn btn-default pull-right" style="margin: 10px 0">评论</button>
                                 </div>
                             </div>
                         </div>
@@ -169,25 +154,25 @@
                         <h4 class="title">标签云</h4>
 
                         <div class="content tag-cloud">
-                            <a href="/tag/about-ghost/">Ghost</a>
-                            <a href="/tag/release/">新版本发布</a>
-                            <a href="/tag/javascript/">JavaScript</a>
-                            <a href="/tag/promise/">Promise</a>
-                            <a href="/tag/zhuti/">主题</a>
-                            <a href="/tag/mysql/">MySQL</a>
-                            <a href="/tag/nodejs/">Node.js</a>
-                            <a href="/tag/ghost-in-depth/">深度玩转 Ghost</a>
-                            <a href="/tag/ubuntu/">Ubuntu</a>
-                            <a href="/tag/aliyun-ecs/">阿里云服务器</a>
-                            <a href="/tag/nginx/">Nginx</a>
-                            <a href="/tag/bae/">BAE</a>
-                            <a href="/tag/theme/">Theme</a>
-                            <a href="/tag/customize-page/">自定义页面</a>
-                            <a href="/tag/static-page/">静态页面</a>
-                            <a href="/tag/upload/">上传</a>
-                            <a href="/tag/yong-hu-zhi-nan/">用户指南</a>
-                            <a href="/tag/sqlite/">sqlite</a>
-                            <a href="/tag-cloud/">...</a>
+                            <a href="#">Ghost</a>
+                            <a href="#">新版本发布</a>
+                            <a href="#">JavaScript</a>
+                            <a href="#">Promise</a>
+                            <a href="#">主题</a>
+                            <a href="#">MySQL</a>
+                            <a href="#">Node.js</a>
+                            <a href="#">深度玩转 Ghost</a>
+                            <a href="#">Ubuntu</a>
+                            <a href="#">阿里云服务器</a>
+                            <a href="#">Nginx</a>
+                            <a href="#">BAE</a>
+                            <a href="#">Theme</a>
+                            <a href="#">自定义页面</a>
+                            <a href="#/">静态页面</a>
+                            <a href="#">上传</a>
+                            <a href="#">用户指南</a>
+                            <a href="#">sqlite</a>
+                            <a href="#">...</a>
                         </div>
                     </div>
                 </aside>
@@ -309,6 +294,146 @@
           }
         });
     }
+    $('[id^="collapseExample"]').on('show.bs.collapse', function () {
+        $('[id^="collapseExample"]').collapse('hide')
+        //$(this).collapse('toggle')
+    })
 
+
+    var delmedia
+    var delcommenttime
+    var delcommentblogid
+    var ondeletecommentclick = function(o,blogid,commenttime){
+        //alert(blogid+"##"+commenttime)
+        delmedia = $(o).parents(".media")
+        delcommenttime = commenttime
+        delcommentblogid = blogid
+//        $.post("/deletecomment",
+//         {
+//           blogid:blogid,
+//           commenttime:commenttime
+//         },
+//         function(data,status){
+//           //alert("Data: " + data + "\nStatus: " + status);
+//           $(o).parents(".media").remove()
+//         });
+    }
+
+    var ondeletecommentconfirmclick = function(){
+         $.post("/deletecomment",
+         {
+           blogid:delcommentblogid,
+           commenttime:delcommenttime
+         },
+         function(data,status){
+           //alert("Data: " + data + "\nStatus: " + status);
+           delmedia.remove()
+           $('#confirmModal1').modal('hide')
+         });
+    }
+
+    var onunfoldclick = function(o,blogid,author,id){
+        //alert(blogid+"||"+author)
+        $('.unfoldbutton').removeClass('hidden')
+        $('.foldbutton').addClass('hidden')
+        $(o).addClass('hidden')
+        $(o).next().removeClass('hidden')
+
+        $.post("/getcommentbyblogid",
+        {
+            blogid:blogid,
+            author:author
+        },
+        function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status);
+            //window.location.href="/"
+            if(data!="")
+            {
+                var c = data.split('%%')
+                //alert(c.length)
+                $('#'+id).find('.commentbox').siblings().remove()
+                var i = 0
+                while(i<c.length)
+                {
+                    var tmp = c[i].split('##')
+                    if(tmp[4]=="true")
+                    {
+                            $('#'+id).find('.commentbox').after(
+                                        '<div class="media">'+
+                                            '<div class="media-left">'+
+                                                '<a href="#">'+
+                                                    '<img class="media-object" src="@routes.Assets.at("images/test.png")">'+
+                                                '</a>'+
+                                            '</div>'+
+                                            '<div class="media-body">'+
+                                                '<div style="min-height: 45px">'+
+                                                '<a href="#">'+tmp[0]+'</a>'+':'+tmp[1]+
+                                                '</div>' +
+                                                '<time class="date" datetime="'+tmp[2]+'">'+tmp[3]+'</time>'+
+                                                '<div class="pull-right reply"><a data-toggle="modal" data-target="#confirmModal1" href="javascript:" onclick="javascript:ondeletecommentclick(this,\''+blogid+'\',\''+tmp[2]+'\')">删除</a>|<a href="#">回复</a>|<a href="#"><span class="glyphicon glyphicon-thumbs-up"></span></a></div>'+
+                                            '</div>'+
+                                        '</div>')
+                    }else{
+                            $('#'+id).find('.commentbox').after(
+                                        '<div class="media">'+
+                                            '<div class="media-left">'+
+                                                '<a href="#">'+
+                                                    '<img class="media-object" src="@routes.Assets.at("images/test.png")">'+
+                                                '</a>'+
+                                            '</div>'+
+                                            '<div class="media-body">'+
+                                                '<div style="min-height: 45px">'+
+                                                '<a href="#">'+tmp[0]+'</a>'+':'+tmp[1]+
+                                                '</div>' +
+                                                '<time class="date" datetime="'+tmp[2]+'">'+tmp[3]+'</time>'+
+                                                '<div class="pull-right reply"><a href="#">回复</a>|<a href="#"><span class="glyphicon glyphicon-thumbs-up"></span></a></div>'+
+                                            '</div>'+
+                                        '</div>')
+                    }
+                    i++
+                }
+            }
+        })
+
+    }
+
+    var onfoldclick = function(o){
+        $(o).addClass('hidden')
+        $(o).prev().removeClass('hidden')
+    }
+
+    var oncommentclick = function(o,author,time,id){
+        //alert(author+"||"+time)
+        var comment = $(o).prev().val()
+        //var comment = $('#commentid1').val()
+        //alert(comment)
+        $.post("/postcomment",
+        {
+            author:author,
+            time:time,
+            comment:comment
+        },
+        function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status);
+            //window.location.href="/"
+             $(o).prev().val('')
+             var tmp = data.split('##')
+             $('#'+id).find('.commentbox').after(
+                '<div class="media">'+
+                     '<div class="media-left">'+
+                         '<a href="#">'+
+                             '<img class="media-object" src="@routes.Assets.at("images/test.png")">'+
+                         '</a>'+
+                     '</div>'+
+                      '<div class="media-body">'+
+                          '<div style="min-height: 45px">'+
+                               '<a href="#">'+'@u.username'+'</a>'+':'+comment+
+                          '</div>' +
+                          '<time class="date" datetime="'+tmp[1]+'">'+tmp[0]+'</time>'+
+                          '<div class="pull-right reply"><a data-toggle="modal" data-target="#confirmModal1" href="javascript:" onclick="ondeletecommentclick(this,\''+time+'||'+author+'\',\''+tmp[1]+'\')">删除</a>|<a href="#">回复</a>|<a href="#"><span class="glyphicon glyphicon-thumbs-up"></span></a></div>'+
+                      '</div>'+
+                 '</div>')
+        })
+    }
 </script>
 }
